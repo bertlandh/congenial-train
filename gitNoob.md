@@ -100,3 +100,20 @@ git status
 
 Differences
 git diff
+
+use source controll editor to add files to staging
+git add .
+git commit -a -m "Moved Files"
+
+git log
+git log --oneline
+git diff 19ed178
+
+plugin for visual studio code git lense
+
+Changing History
+Amending
+git commit -amend
+git commit -am "New commit message"
+git commit -ammend --no-edit
+

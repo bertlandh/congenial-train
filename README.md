@@ -4,7 +4,7 @@
 ### I can't wait to see what you create!
 
 ![Pixabay_Feater](pic/assets/parrot-feathers-6619082_1280.jpg)
-**I hope you have so myuch fun using this website!**
+**I hope you have so much fun using this website!**
 
 **check out these websites:**
 

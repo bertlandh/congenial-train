@@ -160,6 +160,7 @@ delete the branch
 
 Merge Conflicts
 
-
+git restore .
+git stash list
 
 

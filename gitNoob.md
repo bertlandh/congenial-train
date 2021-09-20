@@ -63,3 +63,12 @@ notes/
 
 git add .
 git commit -a -m "Fifth Commit"
+
+Global Ignore File
+git config --global core.excludesfile [file]
+
+Clearing the cache
+git rm -r --cached .
+
+git add .
+git commit -a -m "Fifth Commit"

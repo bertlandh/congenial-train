@@ -160,18 +160,19 @@ delete the branch
 
 Merge Conflicts
 
-<<<<<<< Updated upstream
 git restore .
 git stash list
-=======
 Stashing Code
 git stash
 git stash list
 git stash apply
 git stash pop
 
+Git Clean
+git clean -n
+git clean -d
+git clean -f
+git clean -df
 
-
->>>>>>> Stashed changes
 
 

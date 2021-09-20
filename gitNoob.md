@@ -195,6 +195,9 @@ git remote remove NAME
 git rename OLDNAME NEWNAME
 git remote -v
 
+git remote add origin https://github.com/bertlandh/congenial-train.git
+git push --all
+
 Git Push
 git push REMOTE BRANCH
 git push --set-upstream-to origin main

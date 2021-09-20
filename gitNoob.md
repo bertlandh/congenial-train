@@ -92,3 +92,11 @@ git restore .
 manually delete the untracked file
 git status
 
+use git mv
+git mv indexDeleteme.html indexHome.html
+
+git mv indexHome.html indexDeleteme.html - restore 
+git status
+
+Differences
+git diff

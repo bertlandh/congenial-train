@@ -1,4 +1,4 @@
-# Github Noob Guied
+# Github Noob Guide
 
 Install vscode and Install gitbash for windows
 

@@ -1,4 +1,3 @@
-
 ## INSTALL
 
 termux
@@ -356,74 +355,3 @@ For entire cleanup it is better to erase app data through Android settings.
 If its been installed with apt do apt remove tool-name
 If it's installed with pkg, do pkg remove <tool name>
 If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
-
-phone hacking
-https://www.youtube.com/channel/UC1szFCBUWXY3ESff8dJjjzw
-
-Hitomi-Downloader
-https://github.com/KurtBestor/Hitomi-Downloader
-
-Darknet-Search-Engine
-https://github.com/r3k4t/Darknet-Search-Engine
-
-termux-app/issues/2015
-https://github.com/termux/termux-app/issues/2015
-
-Tool-X
-https://github.com/rajkumardusad/Tool-X
-
-300+ Best Termux Tools For Ethical Hacking
-https://www.techncyber.com/2018/08/termux-hacking-tools.html
-
-RUN_COMMAND Intent
-https://github.com/termux/termux-app/wiki/RUN_COMMAND-Intent
-
-Termux-Whatsapp-Bot-English
-https://github.com/HotarouTakahashi/Termux-Whatsapp-Bot-English
-
-termux-whatsapp-bot
-https://github.com/fdciabdul/termux-whatsapp-bot
-
-Top 5 Best Information Gathering Tools For Termux
-https://amanbytes.com/top-5-best-information-gathering-tools-for-termux/
-
-termux 
-https://github.com/topics/termux
-
-Termux Automation Scripts
-https://github.com/themobileprof/scripts
-
-Termux-sms-send
-https://wiki.termux.com/wiki/Termux-sms-send
-
-wabot-aq
-https://github.com/Nurutomo/wabot-aq
-https://www.youtube.com/watch?v=6sMJdpv7VTc
-
-https://www.youtube.com/watch?v=oee1tmbtti8
-
-
-Fix httpd
-#
-# This script is part of the video,
-# Cómo instalar Apache Web Server en Android: https://youtu.be/cwp63pJMy_A and
-# it's intended to be used on Termux Android 32 bits in order to fix the issue,
-# https://github.com/termux/termux-packages/issues/1727
-# Before executing this script you must install termux-chroot see de video,
-# Cómo hacer chroot en Termux: https://youtu.be/gdy12S94BBk
-#
-#!/usr/bin/env bash
-aps=$(pidof httpd)
-pidf=/var/run/apache2/httpd.pid
-[[ -f $pidf ]] && rm -f $pidf
-[[ "$aps" != "" ]] && kill -9 $aps
-
-reboot phone
-su -c "reboot"
-
-band name
-catastrophic dismemberment
-
-war isnt about who is right, its about who is left
-
-team bisket

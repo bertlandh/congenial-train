@@ -72,3 +72,6 @@ git rm -r --cached .
 
 git add .
 git commit -a -m "Fifth Commit"
+
+Deleting and Renaming
+Delete from file system

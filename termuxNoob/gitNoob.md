@@ -27,20 +27,20 @@ Install vscode and Install gitbash for windows
 
 ## Git Environments
 
-Working - working store
-Staging - temp store que up changes -use the git add command
-Commit - final evn -use the git commit command
+    Working - working store
+    Staging - temp store que up changes -use the git add command
+    Commit - final evn -use the git commit command
 
 ## File States
 
-Tracked - Unmodified Modified Staged - files from the previous commit\snapshot
-Untracted - anything else eg a new file added since the last commit
+    Tracked - Unmodified Modified Staged - files from the previous commit\snapshot
+    Untracted - anything else eg a new file added since the last commit
 
 ## Tracked Files 
 
-Unmodified - no change since last commit
-Modified - changes since last commit
-Staged - files in staging use git add command
+    Unmodified - no change since last commit
+    Modified - changes since last commit
+    Staged - files in staging use git add command
 
     git status
 
@@ -228,4 +228,4 @@ make a change to this file
     git push -u origin main # --set-upstream
     git push --all
     git branch --set-upstream-to <origin/remote-branch>
-    
+

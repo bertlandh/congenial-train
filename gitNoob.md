@@ -133,5 +133,33 @@ git checkout -b NAME
 
 git switch -c noob-branch-test
 
+Merging
+git merge <branch>
+git switch master
+git merge noob-branch-test
+git log --oneline
+
+Deleting a branch
+git branch -d NAME
+git branch -D NAME
+
+git branch -d noob-branch-test
+git branch
+
+Git Flow
+Feature/fix branch
+Make changes
+Merge to master
+Delete old branch
+
+leave the master
+make a branch
+work on it
+merge to master
+delete the branch
+
+Merge Conflicts
+
+
 
 

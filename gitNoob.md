@@ -52,3 +52,11 @@ git status
 git restore --staged gitNoob.md
 git status
 git restore .
+
+Using .gitignore
+.DS_Store
+.vscode/
+authentication.js
+node_modules
+notes/
+**/*-todo.md

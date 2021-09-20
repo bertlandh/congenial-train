@@ -45,3 +45,10 @@ Restoring Files
 git restore . 
 git checkout .
 
+make a change to this file
+
+git add .
+git status
+git restore --staged gitNoob.md
+git status
+git restore .

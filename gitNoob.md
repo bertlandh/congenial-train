@@ -182,15 +182,25 @@ Fetch/Pull
 
 Set up remote
 github.new
+https://github.com/bertlandh/congenial-train.git
 NAME Aa1 _ - .
 click suggested name
 add description
 set public or private
 click create repository
 
+Git Remote
 git remote add NAME URL
 git remote remove NAME
 git rename OLDNAME NEWNAME
 git remote -v
+
+Git Push
+git push REMOTE BRANCH
+git push --set-upstream-to origin main
+git push -u origin main # --set-upstream
+git push --all
+git branch --set-upstream-to <origin/remote-branch>
+
 
 

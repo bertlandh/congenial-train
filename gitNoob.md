@@ -124,5 +124,14 @@ git log --oneline
 git reset 2784909
 git reset --hard 2784909 - dangerous will delete pervious commits
 
+Rebasing
+
+Branches
+git branch
+git switch -c NAME
+git checkout -b NAME
+
+git switch -c noob-branch-test
+
 
 

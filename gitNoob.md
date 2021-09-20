@@ -175,4 +175,22 @@ git clean -f
 git clean -df
 
 
+Working with Github
+Set up remote
+Push
+Fetch/Pull
+
+Set up remote
+github.new
+NAME Aa1 _ - .
+click suggested name
+add description
+set public or private
+click create repository
+
+git remote add NAME URL
+git remote remove NAME
+git rename OLDNAME NEWNAME
+git remote -v
+
 

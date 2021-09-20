@@ -1,26 +1,22 @@
-# github
+# Github Noob Guied
 
-    git config --global user.name "Bertland Hope"
-    git config --global user.email "bertlandhope@gmail.com"
+Install vscode and Install gitbash for windows
 
-    install vscode
-    install gitbash for windows
+## Git Config 
 
-# Git Config 
-
-git config command 
+    git config command 
 
     git config --global user.name "Your Name" 
     git config --global user.email "Your Email" 
 
-# create a folder
+## create a folder
 
     open with vscode
     open terminal
     change terminal to gitbash
     git init
 
-# Staging Files 
+## Staging Files 
 
     git add FILENANE 
     git add  --all
@@ -29,18 +25,18 @@ git config command
     git commit -m "First Commit" 
     git log
 
-# Git Environments
+## Git Environments
 
 Working - working store
 Staging - temp store que up changes -use the git add command
 Commit - final evn -use the git commit command
 
-# File States
+## File States
 
 Tracked - Unmodified Modified Staged - files from the previous commit\snapshot
 Untracted - anything else eg a new file added since the last commit
 
-# Tracked Files 
+## Tracked Files 
 
 Unmodified - no change since last commit
 Modified - changes since last commit
@@ -48,7 +44,7 @@ Staged - files in staging use git add command
 
     git status
 
-# Restoring Files 
+## Restoring Files 
 
     git restore . 
     git checkout .
@@ -72,18 +68,18 @@ make a change to this file
     git add .
     git commit -a -m "Fifth Commit"
 
-# Global Ignore File
+## Global Ignore File
 
     git config --global core.excludesfile [file]
 
-# Clearing the cache
+## Clearing the cache
 
     git rm -r --cached .
 
     git add .
     git commit -a -m "Fifth Commit"
 
-# Deleting and Renaming
+## Deleting and Renaming
 
     Delete from file system
     git status
@@ -91,13 +87,13 @@ make a change to this file
     git commit -a -m "this take so much time add and them commiting"
     git restore .
 
-# Use git rm
+## Use git rm
 
     git rm indexDeleteme.html
     git restore -S .
     git restore .
 
-# Rename Files
+## Rename Files
 
     use file explore to rename a file
     git status
@@ -105,14 +101,14 @@ make a change to this file
     manually delete the untracked file
     git status
 
-# use git mv
+## use git mv
 
     git mv indexDeleteme.html indexHome.html
 
     git mv indexHome.html indexDeleteme.html - restore 
     git status
 
-# Differences
+## Differences
 
     git diff
 
@@ -120,7 +116,7 @@ make a change to this file
     git add .
     git commit -a -m "Moved Files"
 
-# Git Log
+## Git Log
 
     git log
     git log --oneline
@@ -128,7 +124,7 @@ make a change to this file
 
     plugin for visual studio code git lense
 
-# Changing History
+## Changing History
 
     Amending
     git commit --amend
@@ -137,15 +133,15 @@ make a change to this file
 
     git log --oneline
 
-# Rewind
+## Rewind
 
     git log --oneline
     git reset 2784909
     git reset --hard 2784909 - dangerous will delete pervious commits
 
-# Rebasing
+## Rebasing
 
-# Branches
+## Branches
 
     git branch
     git switch -c NAME
@@ -153,14 +149,14 @@ make a change to this file
 
     git switch -c noob-branch-test
 
-# Merging
+## Merging
 
     git merge <branch>
     git switch master
     git merge noob-branch-test
     git log --oneline
 
-# Deleting a branch
+## Deleting a branch
 
     git branch -d NAME
     git branch -D NAME
@@ -168,7 +164,7 @@ make a change to this file
     git branch -d noob-branch-test
     git branch
 
-# Git Flow
+## Git Flow
 
     Feature/fix branch
     Make changes
@@ -181,7 +177,7 @@ make a change to this file
     merge to master
     delete the branch
 
-# Merge Conflicts
+## Merge Conflicts
 
     git restore .
     git stash list
@@ -191,7 +187,7 @@ make a change to this file
     git stash apply
     git stash pop
 
-# Git Clean
+## Git Clean
 
     git clean -n
     git clean -d
@@ -199,13 +195,13 @@ make a change to this file
     git clean -df
 
 
-# Working with Github
+## Working with Github
 
     Set up remote
     Push
     Fetch/Pull
 
-# Set up remote
+## Set up remote
 
     github.new
     https://github.com/bertlandh/congenial-train.git
@@ -215,7 +211,7 @@ make a change to this file
     set public or private
     click create repository
 
-# Git Remote
+## Git Remote
 
     git remote add NAME URL
     git remote remove NAME
@@ -225,13 +221,11 @@ make a change to this file
     git remote add origin https://github.com/bertlandh/congenial-train.git
     git push --all
 
-# Git Push
+## Git Push
 
     git push REMOTE BRANCH
     git push --set-upstream-to origin main
     git push -u origin main # --set-upstream
     git push --all
     git branch --set-upstream-to <origin/remote-branch>
-
-
-
+    

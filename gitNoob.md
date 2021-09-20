@@ -23,6 +23,7 @@ git add  --all
 git add --A 
 git add . 
 git commit -m "First Commit" 
+git log
 
 git status
 

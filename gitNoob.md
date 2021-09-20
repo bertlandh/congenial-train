@@ -53,10 +53,13 @@ git restore --staged gitNoob.md
 git status
 git restore .
 
-Using .gitignore
+Create a file at project folder root .gitignore
 .DS_Store
 .vscode/
 authentication.js
 node_modules
 notes/
 **/*-todo.md
+
+git add .
+git commit -a -m "Fifth Commit"

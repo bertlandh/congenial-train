@@ -1,4 +1,6 @@
-INSTALL
+
+## INSTALL
+
 termux
 download and install the apk
 https://f-droid.org/packages/com.termux/
@@ -11,8 +13,10 @@ Termux:Styling
 Termux:Tasker
 Termux:Widget
   
-SETUP
-Run commands#
+## SETUP
+
+### Run commands
+
 termux-setup-storage
 pkg update
 pkg upgrade
@@ -23,6 +27,8 @@ sshd
 
 pkg install php mariadb apache2 php-apache wget phpmyadmin -y
 
+
+### Webserver
 cd ~
 cd $PREFIX/etc/apache2
 cd ../usr/etc/apache2
@@ -102,6 +108,8 @@ httpd
 
 http://192.168.100.199:8080/index.php
 
+
+## DATABASE Server
 To launch the daemon type:
 mysqld_safe &
 
@@ -151,7 +159,7 @@ cd /data/data/com.termux/files/usr/var/run/apache2
 rm httpd.pid
 apachectl start
 
-Termux:Boot
+## Termux:Boot
 //Create the directories needed
 mkdir .termux
 mkdir .termux/boot

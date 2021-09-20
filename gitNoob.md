@@ -75,3 +75,20 @@ git commit -a -m "Fifth Commit"
 
 Deleting and Renaming
 Delete from file system
+git status
+git add .
+git commit -a -m "this take so much time add and them commiting"
+git restore .
+
+Use git rm
+git rm indexDeleteme.html
+git restore -S .
+git restore .
+
+Rename Files
+use file explore to rename a file
+git status
+git restore .
+manually delete the untracked file
+git status
+

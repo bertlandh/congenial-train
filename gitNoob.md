@@ -25,6 +25,20 @@ git add .
 git commit -m "First Commit" 
 git log
 
+Git Environments
+Working - working store
+Staging - temp store que up changes -use the git add command
+Commit - final evn -use the git commit command
+
+File States
+Tracked - Unmodified Modified Staged - files from the previous commit\snapshot
+Untracted - anything else eg a new file added since the last commit
+
+Tracked Files 
+Unmodified - no change since last commit
+Modified - changes since last commit
+Staged - files in staging use git add command
+
 git status
 
 Restoring Files 

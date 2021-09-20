@@ -113,7 +113,16 @@ plugin for visual studio code git lense
 
 Changing History
 Amending
-git commit -amend
+git commit --amend
 git commit -am "New commit message"
-git commit -ammend --no-edit
+git commit -amend --no-edit
+
+git log --oneline
+
+Rewind
+git log --oneline
+git reset 2784909
+git reset --hard 2784909 - dangerous will delete pervious commits
+
+
 

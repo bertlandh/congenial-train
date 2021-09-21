@@ -2,21 +2,21 @@
 
 ## Install Termux
 
-  download and install the apks
-  https://f-droid.org/packages/com.termux/
-  Termux
-  https://search.f-droid.org/?q=termux&lang=en
-  Termux:Boot
-  Termux:API    
-  Termux:Float 
-  Termux:Styling
-  Termux:Tasker
-  Termux:Widget
+  **download and install the apks**
+      https://f-droid.org/packages/com.termux/
+      Termux
+      https://search.f-droid.org/?q=termux&lang=en
+      Termux:Boot
+      Termux:API    
+      Termux:Float 
+      Termux:Styling
+      Termux:Tasker
+      Termux:Widget
   
 ## SETUP
 
 ### Run commands
-  termux-setup-storage && pkg update && pkg upgrade && pkg install nano curl termux-auth php openssh mariadb apache2 php-apache wget phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y && passwd && sshd
+  termux-setup-storage && pkg update && pkg upgrade && pkg install nano curl termux-auth php openssh mariadb apache2 php-apache phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y && passwd && sshd
 
 ### Webserver
 

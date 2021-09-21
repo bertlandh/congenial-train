@@ -16,13 +16,7 @@
 ## SETUP
 
 ### Run commands
-
-  termux-setup-storage
-  pkg update
-  pkg upgrade
-  pkg install nano curl termux-auth php openssh mariadb apache2 php-apache wget phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y
-  passwd
-  sshd
+  termux-setup-storage && pkg update && pkg upgrade && pkg install nano curl termux-auth php openssh mariadb apache2 php-apache wget phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y && passwd && sshd
 
 ### Webserver
 

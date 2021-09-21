@@ -151,6 +151,10 @@ That's MySQL configured. You can test it by typing:
 
 and type your password. You should get to the MariaDB prompt. Type quit again.
 
+#### Shutdown 
+
+    mysqladmin shutdown
+
 #### Composer
 
     pkg install curl
@@ -207,9 +211,6 @@ Copy pasta to start your services
     #!/data/data/com.termux/files/usr/bin/sh
     termux-wake-lock
     sshd
-    mysqld_safe &
-    sleep 5
-    httpd
     
 sudo apachectl start
     

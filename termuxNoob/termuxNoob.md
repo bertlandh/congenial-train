@@ -240,6 +240,28 @@ reboot phone
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
+### Termux Backup 
+    
+    termux-setup-storage
+
+    tar -zcf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files ./home ./usr
+
+### Termux Restore
+
+    termux-setup-storage
+
+    tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
+
+### Uninstall termux
+
+    rm -rf $PREFIX and then restart application. 
+    
+This doesn't touch $HOME directory but removes all packages, basic environment will be reinstalled on next app startup.
+For entire cleanup it is better to erase app data through Android settings.
+If its been installed with apt do apt remove tool-name
+If it's installed with pkg, do pkg remove <tool name>
+If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
+
 # Work in progress
 
 pkg uninstall
@@ -297,15 +319,5 @@ factor 100
     ps
     ps ax
     ps -ef
-
-### Uninstall termux
-
-    rm -rf $PREFIX and then restart application. 
-    
-This doesn't touch $HOME directory but removes all packages, basic environment will be reinstalled on next app startup.
-For entire cleanup it is better to erase app data through Android settings.
-If its been installed with apt do apt remove tool-name
-If it's installed with pkg, do pkg remove <tool name>
-If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
 
 edited on: https://dillinger.io/ 🤠

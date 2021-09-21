@@ -211,15 +211,9 @@ Copy pasta to start your services
     #!/data/data/com.termux/files/usr/bin/sh
     termux-wake-lock
     sshd
+    mysqld_safe --basedir=$PREFIX --datadir=$PREFIX/var/lib/mysql
+    httpd
     
-sudo apachectl start
-    
-To start Termux-Services use this code instead
-
-    #!/data/data/com.termux/files/usr/bin/sh
-    termux-wake-lock
-    . $PREFIX/etc/profile
-
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 

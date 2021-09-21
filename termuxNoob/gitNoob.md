@@ -9,7 +9,7 @@ Install vscode and Install gitbash for windows
     git config --global user.name "Your Name" 
     git config --global user.email "Your Email" 
 
-## create a folder
+## create or Open project folder
 
     open with vscode
     open terminal

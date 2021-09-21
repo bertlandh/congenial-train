@@ -1,154 +1,166 @@
-## INSTALL
+# Termux Copy Pasta
 
-termux
-download and install the apk
-https://f-droid.org/packages/com.termux/
-Termux
-https://search.f-droid.org/?q=termux&lang=en
-Termux:Boot
-Termux:API    
-Termux:Float 
-Termux:Styling
-Termux:Tasker
-Termux:Widget
+## Install Termux
+
+  download and install the apks
+  https://f-droid.org/packages/com.termux/
+  Termux
+  https://search.f-droid.org/?q=termux&lang=en
+  Termux:Boot
+  Termux:API    
+  Termux:Float 
+  Termux:Styling
+  Termux:Tasker
+  Termux:Widget
   
 ## SETUP
 
 ### Run commands
 
-termux-setup-storage
-pkg update
-pkg upgrade
-pkg install termux-auth
-passwd
-pkg install openssh
-sshd
-
-pkg install php mariadb apache2 php-apache wget phpmyadmin -y
-
+  termux-setup-storage
+  pkg update
+  pkg upgrade
+  pkg install nano curl termux-auth php openssh mariadb apache2 php-apache wget phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y
+  passwd
+  sshd
 
 ### Webserver
-cd ~
-cd $PREFIX/etc/apache2
-cd ../usr/etc/apache2
-nano httpd.conf
+
+  cd ~
+  cd $PREFIX/etc/apache2
+  cd ../usr/etc/apache2
+  nano httpd.conf
+
 Scroll down about a page to the huge list of LoadModule commands. We need to disable one and enable a couple. The # sign disables a line. Find:
 
-#LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
-and remove the # at the beginning. The following line should be:
+  #LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
+  and remove the # at the beginning. The following line should be:
 
-LoadModule mpm_worker_module libexec/apache2/mod_mpm_worker.so
-Add a # at the beginning of that line.
+  LoadModule mpm_worker_module libexec/apache2/mod_mpm_worker.so
+  Add a # at the beginning of that line.
 
 Close to the bottom of the LoadModule lists, find:
-#LoadModule rewrite_module libexec/apache2/mod_rewrite.so
-and again, remove the # from the beginning.
+
+  #LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+  and again, remove the # from the beginning.
 
 We now need to tell apache to use the PHP module, so add this line after the line you just edited:
-LoadModule php_module /data/data/com.termux/files/usr/libexec/apache2/libphp.so
+
+  LoadModule php_module /data/data/com.termux/files/usr/libexec/apache2/libphp.so
 
 Now, scroll down until you find the section header:
-DocumentRoot "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
-<Directory "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs">
+
+  DocumentRoot "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
+  <Directory "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs">
 
 A few lines down, you'll see the line:
-AllowOverride None
 
-Change this to read:
-AllowOverride FileInfo
+  AllowOverride None
+
+  Change this to read:
+  AllowOverride FileInfo
 
 Immediately below this, you'll see a block:
 
-<IfModule dir_module>
-  DirectoryIndex index.html
-</IfModule>
+  <IfModule dir_module>
+    DirectoryIndex index.html
+  </IfModule>
 
 Change index.html to read index.php and append the following code immediately below that block:
 
-<FilesMatch \.php$>
-    SetHandler application/x-httpd-php
-</FilesMatch>
+  <FilesMatch \.php$>
+      SetHandler application/x-httpd-php
+  </FilesMatch>
 
 Type Ctrl-O and press Enter, 
 Type Ctrl-X to exit nano.
 
-cd $PREFIX/lib
-cd ../../lib
-touch php.ini
-nano php.ini
-upload_max_filesize = 32M
-post_max_size = 32M
+  cd $PREFIX/lib
+  cd ../../lib
+  touch php.ini
+  nano php.ini
+  upload_max_filesize = 32M
+  post_max_size = 32M
 
-include_path = ".:$PREFIX/bin/php"
-
-Type Ctrl-O and press Enter, 
-Type Ctrl-X to exit nano.
-
-cd $PREFIX/share/apache2/default-site/htdocs
-httpd
-killall httpd
-
-rm index.html
-touch index.php
-nano index.php
-
-<?php
-phpinfo();
-?>
+  include_path = ".:$PREFIX/bin/php"
 
 Type Ctrl-O and press Enter, 
 Type Ctrl-X to exit nano.
 
-killall httpd
-apachectl start # to start the server
-apachectl restart # to restart the server
-apachectl stop # to stop the Apache
-httpd
+  cd $PREFIX/share/apache2/default-site/htdocs
+  httpd
+  killall httpd
 
-http://192.168.100.199:8080/index.php
+  rm index.html
+  touch index.php
+  nano index.php
+
+  <?php
+  phpinfo();
+  ?>
+
+  Type Ctrl-O and press Enter, 
+  Type Ctrl-X to exit nano.
+
+  killall httpd
+  apachectl start # to start the server
+  apachectl restart # to restart the server
+  apachectl stop # to stop the Apache
+  httpd
+
+  http://192.168.100.199:8080/index.php
 
 
-## DATABASE Server
+### DATABASE Server
+
 To launch the daemon type:
-mysqld_safe &
+  
+  mysqld_safe &
 
 You might need to tap Enter to get a command prompt to appear. The daemon is now running, so we can connect to it by typing:
-mysql
+  
+  mysql
 
-You should see a prompt:
-MariaDB [(none)]>
+  You should see a prompt:
+  MariaDB [(none)]>
 
 We need to set up a database for Wordpress and a user for Wordpress to access the database.
 To add the database type:
-CREATE DATABASE wordpress;
+
+  CREATE DATABASE wordpress;
+
 [You should get a reply: Query OK, 1 row affected (0.001 sec) or similar]
 
 To create a user, type:
-GRANT ALL PRIVILEGES ON wordpress.* TO "wordpress"@"localhost" IDENTIFIED BY "password";
+
+  GRANT ALL PRIVILEGES ON wordpress.* TO "wordpress"@"localhost" IDENTIFIED BY "password";
 
 You can obviously substitute the word "password" for something that's meaningful! As it's only accessible to the device itself (localhost) you should be fine with something fairly insecure, but don't let me dictate how secure you want it!
 [You should get a reply: Query OK, 0 rows affected (0.054 sec) or similar]
-Type:
-quit
+  
+  Type:
+  quit
 
 That's MySQL configured. You can test it by typing:
-mysql -u wordpress -p
+  mysql -u wordpress -p
 and type your password. You should get to the MariaDB prompt. Type quit again.
 
-mysqld_safe & 
-mysql
-CREATE DATABASE uwi;
-GRANT ALL PRIVILEGES ON uwi.* TO "god"@"localhost" IDENTIFIED BY "god";
-quit
-mysql -u god -p
+  mysqld_safe & 
+  mysql
+  CREATE DATABASE uwi;
+  GRANT ALL PRIVILEGES ON uwi.* TO "god"@"localhost" IDENTIFIED BY "god";
+  quit
+  mysql -u god -p
 
-cd $PREFIX/share/apache2/default-site/htdocs
-cd ../../share/apache2/default-site/htdocs
+  cd $PREFIX/share/apache2/default-site/htdocs
+  cd ../../share/apache2/default-site/htdocs
 
-pkg install curl
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/data/data/com.termux/files/usr/bin --filename=composer
-composer self-update
-which composer
+#### Composer
+
+  pkg install curl
+  curl -sS https://getcomposer.org/installer | php -- --install-dir=/data/data/com.termux/files/usr/bin --filename=composer
+  composer self-update
+  which composer
 
 /data/data/com.termux/files/usr/share/phpmyadmin
 /data/data/com.termux/files/usr/share/apache2/default-site/htdocs
@@ -158,108 +170,53 @@ cd /data/data/com.termux/files/usr/var/run/apache2
 rm httpd.pid
 apachectl start
 
-## Termux:Boot
-//Create the directories needed
-mkdir .termux
-mkdir .termux/boot
-cd .termux/boot
-//this creates an empty file
-touch start.sh    
-chmod +x start.sh
-//Edit the file to add your start up commands - I used nano editor like so
-nano start.sh
+### Termux:Boot
 
-#!/data/data/com.termux/files/usr/bin/sh
-termux-wake-lock
-sshd
-mysqld_safe &
-sleep 5
-httpd
+Create the directories needed
+  mkdir .termux
+  mkdir .termux/boot
+  cd .termux/boot
+this creates an empty file
+  touch start.sh    
+  chmod +x start.sh
+Edit the file to add your start up commands - I used nano editor like so
+  nano start.sh
+
+  #!/data/data/com.termux/files/usr/bin/sh
+  termux-wake-lock
+  sshd
+  mysqld_safe &
+  sleep 5
+  httpd
 
 sudo apachectl start
 
-+=+
-#!/data/data/com.termux/files/usr/bin/sh
-termux-wake-lock
-. $PREFIX/etc/profile
+To start Termux-Services
+  #!/data/data/com.termux/files/usr/bin/sh
+  termux-wake-lock
+  . $PREFIX/etc/profile
 
 Type Ctrl-O and press Enter, 
 Type Ctrl-X to exit nano.
 
 After editing and saving the file, try restarting your device. And then run this command to see if it worked:
 reboot phone
-su -c "reboot"
+  su -c "reboot"
 
-pkg install curl
-pkg install php
-pkg install git
-pkg install zsh
-pkg install nano
+### xshin
 
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-nano .zshrc
-Find the line ZSH_THEME="robbyrussell" replace robbyrussell with agnoster theme in .zshrc File (CTRL + X & Enter to Save)
-chsh
-zsh
-bash
+  apt install termux-api
+  apt install clang
+  https://mytermux-xshin404.vercel.app/docs/intro
+  pkg update -y && pkg upgrade -y
+  pkg i git bc -y
+  git clone https://github.com/xshin404/myTermux
+  cd myTermux && ./install.sh
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh-syntax-highlighting" --depth 1
-echo "source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> "$HOME/.zshrc"
+Type Ctrl-O and press Enter, 
+Type Ctrl-X to exit nano.
 
-https://itrendbuzz.com/install-and-configure-z-shell-on-termux/
-
-
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/data/data/com.termux/files/usr/bin --filename=composer
-composer self-update
-which composer
-
-
-apt install php-apache
-cd /data/data/com.termux/files/usr/etc/apache2/
-nano httpd.conf
-LoadModule php7_module /data/data/com.termux/files/usr/libexec/apache2/libphp7.so
-<FilesMatch \.php$>
-  SetHandler application/x-httpd-php
-</FilesMatch>
-
-/data/data/com.termux/files/usr/share/apache2/default-site/htdocs
-
-apt install apache2 php php-apache phpmyadmin mariadb -y
-httpd
-killall httpd
-cd $PREFIX/share/apache2/default-site/htdocs
-rm index.html
-touch index.php
-nano index.php
-
-<?php
-phpinfro();
-?>
-
-cd
-pwd
-cd ..
-cd usr
-cd etc
-cd apache2
-clear
-pwd
-ls
-nano htt
-
-LoadModule php_module libexec/apache2/libphp.so
-LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
-#LoadModule mpm_worker_module libexec/apache2/mod_mpm_worker.so
-https://www.youtube.com/watch?v=0ytASgBK8uA
-
-apt list
-apt list --upgradeable
-apt list --installed
-apt update
-apt upgrade
-apt remove
-termux-info
+# Work in progress
 
 pkg uninstall
 passwd
@@ -269,8 +226,7 @@ cd
 cd ../..
 rm
 rm -rf
-apt-get install openssh
-apt install termux-api
+
 termux-battery-status
 termux-brightness 255
 termux-call-log
@@ -295,63 +251,34 @@ termux-tts-speak hello im god in termux
 termux-tts-speak
 press ctrl+z to stop tts-speak
 factor 100
-fortune
-w3m google.com
-press ctrl+c to close w3m
-cowsay "happ"
 
-pkg install git
-apt install bash
-pkg install wget
-pkg install proot
-pkg install termux-services
-pkg install man
-apt install aria2
-pkg install irssi
-apt install zip unzip
-apt install fish
-apt install figlet
-apt install fortune
-apt install toilet
-apt install w3m
-apt install cowsay
-pkg install php
+### Variables
+  
+  echo $HOME
+  /data/data/com.termux/files/home
 
-pkg install python
+  echo $PREFIX
+  /data/data/com.termux/files/usr
 
-pkg install proot
-termux-chroot
-ls /usr
-bin  doc  etc  include	lib  libexec  share  tmp  var
+### Cron
 
-Press Q to exit man page
+  pkg install cronie termux-services
+  restart termux session
+  sv-enable crond 
+  crontab -e 
+  https://crontab.guru/
 
+### list process
 
-Variables
-echo $HOME
-/data/data/com.termux/files/home
+  ps
+  ps ax
+  ps -ef
 
-echo $PREFIX
-/data/data/com.termux/files/usr
-
-Cron
-pkg install cronie termux-services
-# restart termux session
-sv-enable crond 
-crontab -e 
-https://crontab.guru/
-
-list process
-ps
-ps ax
-ps -ef
-
-Uninstall termux
-rm -rf $PREFIX and then restart application. This doesn't touch $HOME directory but removes all packages, basic environment will be reinstalled on next app startup.
+### Uninstall termux
+  
+  rm -rf $PREFIX and then restart application. This doesn't touch $HOME directory but removes all packages, basic environment will be reinstalled on next app startup.
 
 For entire cleanup it is better to erase app data through Android settings.
-
-
 If its been installed with apt do apt remove tool-name
 If it's installed with pkg, do pkg remove <tool name>
 If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.

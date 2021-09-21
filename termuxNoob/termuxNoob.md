@@ -1,11 +1,14 @@
 # Termux Copy Pasta
 
 ## Install Termux
-
 **download and install the apks**
-    https://f-droid.org/packages/com.termux/
+    
+https://f-droid.org/packages/com.termux/
+
     Termux
-    https://search.f-droid.org/?q=termux&lang=en
+    
+https://search.f-droid.org/?q=termux&lang=en
+    
     Termux:Boot
     Termux:API  
     Termux:Float
@@ -26,11 +29,10 @@
     cd ../usr/etc/apache2
     nano httpd.conf
 
-Scroll down about a page to the huge list of LoadModule commands. We need to disable one and enable a couple. The # sign disables a line. Find:
+Scroll down about a page to the huge list of LoadModule commands. We need to disable one and enable a couple. **The # sign** disables a line. Find:
 
     #LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
-    
-and remove the # at the beginning. The following line should be:
+    and remove the # at the beginning. The following line should be:
 
     LoadModule mpm_worker_module libexec/apache2/mod_mpm_worker.so
     Add a # at the beginning of that line.
@@ -59,11 +61,13 @@ Change this to read:
 
 Immediately below this, you'll see a block:
 
-  <IfModule dir_module>
+    <IfModule dir_module>
+  
     DirectoryIndex index.html
-  </IfModule>
+  
+    </IfModule>
 
-**Change index.html to read index.php** 
+    Change index.html to read index.php 
 
 and append the following code immediately below that block:
 
@@ -107,7 +111,7 @@ Type Ctrl-X to exit nano.
     apachectl stop # to stop the Apache
     httpd
 
-http://192.168.100.199:8080/index.php
+http://your-server-ip:8080/index.php
 
 ### DATABASE Server
 
@@ -120,6 +124,7 @@ You might need to tap Enter to get a command prompt to appear. The daemon is now
     mysql
 
 You should see a prompt:
+
     MariaDB [(none)]>
 
 We need to set up a database for Wordpress and a user for Wordpress to access the database.
@@ -140,7 +145,9 @@ You can obviously substitute the word "password" for something that's meaningful
     quit
 
 That's MySQL configured. You can test it by typing:
+
     mysql -u wordpress -p
+
 and type your password. You should get to the MariaDB prompt. Type quit again.
 
     mysqld_safe &
@@ -171,14 +178,21 @@ cd ../../share/apache2/default-site/htdocs
 ### Termux:Boot
 
 Create the directories needed
+
     mkdir .termux
     mkdir .termux/boot
     cd .termux/boot
+    
 this creates an empty file
+
     touch start.sh  
     chmod +x start.sh
+    
 Edit the file to add your start up commands - I used nano editor like so
+
     nano start.sh
+
+Copy pasta to start your services
 
     #!/data/data/com.termux/files/usr/bin/sh
     termux-wake-lock
@@ -187,9 +201,10 @@ Edit the file to add your start up commands - I used nano editor like so
     sleep 5
     httpd
     
-    sudo apachectl start
+sudo apachectl start
     
-    To start Termux-Services
+To start Termux-Services use this code instead
+
     #!/data/data/com.termux/files/usr/bin/sh
     termux-wake-lock
     . $PREFIX/etc/profile
@@ -198,7 +213,8 @@ Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
 After editing and saving the file, try restarting your device. And then run this command to see if it worked:
-    reboot phone
+reboot phone
+    
     su -c "reboot"
 
 ### xshin
@@ -274,12 +290,10 @@ factor 100
 
 ### Uninstall termux
 
-    rm -rf $PREFIX and then restart application. This doesn't touch $HOME directory but removes all packages, basic environment will be reinstalled on next app startup.
-
-    For entire cleanup it is better to erase app data through Android settings.
-
-    If its been installed with apt do apt remove tool-name
-
-    If it's installed with pkg, do pkg remove <tool name>
-
-    If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
+    rm -rf $PREFIX and then restart application. 
+    
+This doesn't touch $HOME directory but removes all packages, basic environment will be reinstalled on next app startup.
+For entire cleanup it is better to erase app data through Android settings.
+If its been installed with apt do apt remove tool-name
+If it's installed with pkg, do pkg remove <tool name>
+If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.

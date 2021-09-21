@@ -139,6 +139,7 @@ To create a user, type:
     GRANT ALL PRIVILEGES ON wordpress.\* TO "wordpress"@"localhost" IDENTIFIED BY "password";
 
 You can obviously substitute the word "password" for something that's meaningful! As it's only accessible to the device itself (localhost) you should be fine with something fairly insecure, but don't let me dictate how secure you want it!
+
 [You should get a reply: Query OK, 0 rows affected (0.054 sec) or similar]
 
     Type:
@@ -150,21 +151,14 @@ That's MySQL configured. You can test it by typing:
 
 and type your password. You should get to the MariaDB prompt. Type quit again.
 
-    mysqld_safe &
-    mysql
-    CREATE DATABASE uwi;
-    GRANT ALL PRIVILEGES ON uwi.\* TO "god"@"localhost" IDENTIFIED BY "god";
-    quit
-    mysql -u god -p
-
-cd $PREFIX/share/apache2/default-site/htdocs
-cd ../../share/apache2/default-site/htdocs
-
 #### Composer
 
     pkg install curl
+    
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/data/data/com.termux/files/usr/bin --filename=composer
+    
     composer self-update
+    
     which composer
     
     /data/data/com.termux/files/usr/share/phpmyadmin
@@ -174,6 +168,22 @@ cd ../../share/apache2/default-site/htdocs
     cd /data/data/com.termux/files/usr/var/run/apache2
     rm httpd.pid
     apachectl start
+
+### Move Phpmyadmin (prefered)
+
+    mv -i /data/data/com.termux/files/usr/share/phpmyadmin /data/data/com.termux/files/usr/share/apache2/default-site/htdocs/
+    
+    or using variables
+    
+    mv -v $PREFIX/share/phpmyadmin $PREFIX/share/apache2/default-site/htdocs
+    
+### or Copy Phpmyadmin
+
+    cp -r /data/data/com.termux/files/usr/share/phpmyadmin /data/data/com.termux/files/usr/share/apache2/default-site/htdocs/
+    
+    or using variables
+    
+    cp -r $PREFIX/share/phpmyadmin $PREFIX/share/apache2/default-site/htdocs/
 
 ### Termux:Boot
 
@@ -297,3 +307,5 @@ For entire cleanup it is better to erase app data through Android settings.
 If its been installed with apt do apt remove tool-name
 If it's installed with pkg, do pkg remove <tool name>
 If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
+
+edited on: https://dillinger.io/ 🤠

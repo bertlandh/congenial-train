@@ -54,6 +54,7 @@ A few lines down, you'll see the line:
     AllowOverride None
 
 Change this to read:
+
     AllowOverride FileInfo
 
 Immediately below this, you'll see a block:
@@ -62,7 +63,9 @@ Immediately below this, you'll see a block:
     DirectoryIndex index.html
   </IfModule>
 
-Change index.html to read index.php and append the following code immediately below that block:
+**Change index.html to read index.php** 
+
+and append the following code immediately below that block:
 
     <FilesMatch \.php$>
     SetHandler application/x-httpd-php

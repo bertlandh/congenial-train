@@ -25,10 +25,8 @@ https://search.f-droid.org/?q=termux&lang=en
 ### Webserver
 
     cd ~
-    cd $PREFIX/etc/apache2
-    cd ../usr/etc/apache2
-    nano httpd.conf
-
+    nano $PREFIX/etc/apache2/httpd.conf
+     
 Scroll down about a page to the huge list of LoadModule commands. We need to disable one and enable a couple. **The # sign** disables a line. Find:
 
     #LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
@@ -78,10 +76,10 @@ and append the following code immediately below that block:
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
-    cd $PREFIX/lib
-    cd ../../lib
-    touch php.ini
-    nano php.ini
+    cd ~
+    touch $PREFIX/lib/php.ini
+    nano $PREFIX/lib/php.ini
+
     upload_max_filesize = 32M
     post_max_size = 32M
     
@@ -106,9 +104,6 @@ Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
     killall httpd
-    apachectl start # to start the server
-    apachectl restart # to restart the server
-    apachectl stop # to stop the Apache
     httpd
 
 http://your-server-ip:8080/index.php
@@ -168,10 +163,10 @@ and type your password. You should get to the MariaDB prompt. Type quit again.
     /data/data/com.termux/files/usr/share/phpmyadmin
     /data/data/com.termux/files/usr/share/apache2/default-site/htdocs
     
-    apachectl stop
-    cd /data/data/com.termux/files/usr/var/run/apache2
-    rm httpd.pid
-    apachectl start
+    killall httpd
+    cd ~
+    rm /data/data/com.termux/files/usr/var/run/apache2/httpd.pid
+    httpd
 
 ### Move Phpmyadmin (prefered)
 
@@ -180,14 +175,56 @@ and type your password. You should get to the MariaDB prompt. Type quit again.
     or using variables
     
     mv -v $PREFIX/share/phpmyadmin $PREFIX/share/apache2/default-site/htdocs
-    
-### or Copy Phpmyadmin
 
-    cp -r /data/data/com.termux/files/usr/share/phpmyadmin /data/data/com.termux/files/usr/share/apache2/default-site/htdocs/
+### Add PhpmyAdmin to Apache Virtual path
     
-    or using variables
-    
-    cp -r $PREFIX/share/phpmyadmin $PREFIX/share/apache2/default-site/htdocs/
+    cd ~
+    nano $PREFIX/etc/apache2/httpd.conf
+
+    <Directory />
+    AllowOverride none
+    Require all denied
+    </Directory>
+
+    <Directory />
+    AllowOverride none
+    Require all granted
+    </Directory>
+
+    # Virtual hosts
+    #Include etc/apache2/extra/httpd-vhosts.conf
+    Remove the # to enable    
+
+Type Ctrl-O and press Enter,
+Type Ctrl-X to exit nano.
+
+    cd ~
+    nano $PREFIX/etc/apache2/extra/httpd-vhosts.conf
+
+    <VirtualHost *:8080>
+    ServerAdmin webmaster@dummy-host.example.com
+    DocumentRoot "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
+    ServerName localhost
+    ServerAlias www.dummy-host.example.com
+    ErrorLog "var/log/apache2/dummy-host.example.com-error_log"
+    CustomLog "var/log/apache2/dummy-host.example.com-access_log" common
+    </VirtualHost>
+
+    <VirtualHost *:8080>
+    ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot "/data/data/com.termux/files/usr/share/phpmyadmin"
+    ServerName 0.0.0.0
+    ErrorLog "var/log/apache2/dummy-host2.example.com-error_log"
+    CustomLog "var/log/apache2/dummy-host2.example.com-access_log" common
+    </VirtualHost>
+
+    /data/data/com.termux/files/usr/share/apache2/default-site/htdocs
+    /data/data/com.termux/files/usr/share/phpmyadmin
+
+    /data/data/com.termux/files/usr/share/phpmyadmin
+    $PREFIX/share/phpmyadmin
+
+
 
 ### Termux:Boot
 

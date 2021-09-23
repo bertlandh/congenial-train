@@ -19,8 +19,13 @@ https://search.f-droid.org/?q=termux&lang=en
 ## SETUP
 
 ### Run commands
-
-    termux-setup-storage && pkg update && pkg upgrade && pkg install nano curl termux-auth php openssh mariadb apache2 php-apache phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y && passwd && sshd
+    
+    pkg install openssh
+    passwd
+    sshd
+    termux-setup-storage 
+    pkg update && pkg upgrade 
+    pkg install curl php mariadb apache2 php-apache phpmyadmin git bash wget proot termux-services man aria2 irssi zip unzip python -y
 
 ### Webserver
 
@@ -88,13 +93,13 @@ Type Ctrl-X to exit nano.
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
-    cd $PREFIX/share/apache2/default-site/htdocs
+    cd ~ 
     httpd
     killall httpd
 
-    rm index.html
-    touch index.php
-    nano index.php
+    rm $PREFIX/share/apache2/default-site/htdocs/index.html
+    touch $PREFIX/share/apache2/default-site/htdocs/index.php
+    nano $PREFIX/share/apache2/default-site/htdocs/index.php
 
     <?php
     phpinfo();
@@ -106,7 +111,13 @@ Type Ctrl-X to exit nano.
     killall httpd
     httpd
 
-http://your-server-ip:8080/index.php
+#### edit hosts file windows
+
+    echo 192.168.100.199 expert-dollop >> %WINDIR%\System32\Drivers\Etc\Hosts
+
+#### Access webserver
+
+    http://your-server-ip:8080/index.php
 
 ### DATABASE Server
 
@@ -132,6 +143,9 @@ To add the database type:
 To create a user, type:
 
     GRANT ALL PRIVILEGES ON wordpress.\* TO "wordpress"@"localhost" IDENTIFIED BY "password";
+
+    CREATE USER 'god'@'localhost' IDENTIFIED BY 'god';
+    GRANT ALL ON *.* TO god@localhost IDENTIFIED BY 'god';
 
 You can obviously substitute the word "password" for something that's meaningful! As it's only accessible to the device itself (localhost) you should be fine with something fairly insecure, but don't let me dictate how secure you want it!
 
@@ -168,18 +182,13 @@ and type your password. You should get to the MariaDB prompt. Type quit again.
     rm /data/data/com.termux/files/usr/var/run/apache2/httpd.pid
     httpd
 
-### Move Phpmyadmin (prefered)
-
-    mv -i /data/data/com.termux/files/usr/share/phpmyadmin /data/data/com.termux/files/usr/share/apache2/default-site/htdocs/
-    
-    or using variables
-    
-    mv -v $PREFIX/share/phpmyadmin $PREFIX/share/apache2/default-site/htdocs
-
 ### Add PhpmyAdmin to Apache Virtual path
     
     cd ~
     nano $PREFIX/etc/apache2/httpd.conf
+
+explicitly permit access to web content directories in other 
+< Directory > blocks below.
 
     <Directory />
     AllowOverride none
@@ -224,31 +233,65 @@ Type Ctrl-X to exit nano.
     /data/data/com.termux/files/usr/share/phpmyadmin
     $PREFIX/share/phpmyadmin
 
+Type Ctrl-O and press Enter,
+Type Ctrl-X to exit nano.
 
+    killall -9 httpd
+    cd ~
+    rm /data/data/com.termux/files/usr/var/run/apache2/httpd.pid
+    httpd
+
+### set document root to internal storage folder
+Make your internal storage folder as an apache2 web directory
+
+    cd ~
+    nano $PREFIX/etc/apache2/httpd.conf
+
+    DocumentRoot "/data/data/com.termux/files/home/storage/downloads/htdocs"
+    <Directory "/data/data/com.termux/files/home/storage/downloads/htdocs">
+
+    DocumentRoot "/sdcard/htdocs"
+    <Directory "/sdcard/htdocs">
+
+Type Ctrl-O and press Enter,
+Type Ctrl-X to exit nano.
+
+    cd ~
+    nano $PREFIX/etc/apache2/extra/httpd-vhosts.conf
+
+    DocumentRoot "/sdcard/htdocs"
+
+Type Ctrl-O and press Enter,
+Type Ctrl-X to exit nano.
+
+    DocumentRoot "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
+    <Directory "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs">
+
+    DocumentRoot "/sdcard/htdocs"
+    <Directory "/sdcard/htdocs">
+
+    ErrorLog "var/log/apache2/dummy-host3.example.com-error_log"
+    CustomLog "var/log/apache2/dummy-host3.example.com-access_log" common
 
 ### Termux:Boot
 
 Create the directories needed
 
-    mkdir .termux
-    mkdir .termux/boot
-    cd .termux/boot
-    
-this creates an empty file
-
-    touch start.sh  
-    chmod +x start.sh
+    cd ~
+    mkdir .termux/boot        
+    touch .termux/boot/start.sh  
+    chmod +x .termux/boot/start.sh
     
 Edit the file to add your start up commands - I used nano editor like so
 
-    nano start.sh
+    nano .termux/boot/start.sh
 
 Copy pasta to start your services
 
     #!/data/data/com.termux/files/usr/bin/sh
     termux-wake-lock
     sshd
-    mysqld_safe --basedir=$PREFIX --datadir=$PREFIX/var/lib/mysql
+    mysqld_safe --basedir=$PREFIX --datadir=$PREFIX/var/lib/mysql &
     httpd
     
 Type Ctrl-O and press Enter,
@@ -295,6 +338,8 @@ If it's installed with pkg, do pkg remove <tool name>
 If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
 
 # Work in progress
+
+## set document root to internal storage folder 
 
 pkg uninstall
 passwd
@@ -351,5 +396,9 @@ factor 100
     ps
     ps ax
     ps -ef
+
+### move 
+
+    mv -v /sdcard/Download/htdocs /sdcard
 
 edited on: https://dillinger.io/ 🤠

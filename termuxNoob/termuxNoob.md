@@ -85,6 +85,8 @@ Type Ctrl-X to exit nano.
     touch $PREFIX/lib/php.ini
     nano $PREFIX/lib/php.ini
 
+Copy Pasta to php.ini
+
     upload_max_filesize = 32M
     post_max_size = 32M
     
@@ -94,12 +96,11 @@ Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
     cd ~ 
-    httpd
-    killall httpd
-
     rm $PREFIX/share/apache2/default-site/htdocs/index.html
     touch $PREFIX/share/apache2/default-site/htdocs/index.php
     nano $PREFIX/share/apache2/default-site/htdocs/index.php
+
+Copy Pasta to index.php
 
     <?php
     phpinfo();
@@ -108,16 +109,16 @@ Type Ctrl-X to exit nano.
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
-    killall httpd
-    httpd
-
 #### edit hosts file windows
 
+    open command promt or powershell
     echo 192.168.100.199 expert-dollop >> %WINDIR%\System32\Drivers\Etc\Hosts
 
 #### Access webserver
 
-    http://your-server-ip:8080/index.php
+    http://expert-dollop:8080
+
+    killall httpd
 
 ### DATABASE Server
 
@@ -177,11 +178,6 @@ and type your password. You should get to the MariaDB prompt. Type quit again.
     /data/data/com.termux/files/usr/share/phpmyadmin
     /data/data/com.termux/files/usr/share/apache2/default-site/htdocs
     
-    killall httpd
-    cd ~
-    rm /data/data/com.termux/files/usr/var/run/apache2/httpd.pid
-    httpd
-
 ### Add PhpmyAdmin to Apache Virtual path
     
     cd ~
@@ -210,6 +206,8 @@ Type Ctrl-X to exit nano.
     cd ~
     nano $PREFIX/etc/apache2/extra/httpd-vhosts.conf
 
+edit ServerName for webserver root
+
     <VirtualHost *:8080>
     ServerAdmin webmaster@dummy-host.example.com
     DocumentRoot "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
@@ -219,6 +217,8 @@ Type Ctrl-X to exit nano.
     CustomLog "var/log/apache2/dummy-host.example.com-access_log" common
     </VirtualHost>
 
+edit DocumentRoot and ServerName for phpmyadmin
+
     <VirtualHost *:8080>
     ServerAdmin webmaster@dummy-host2.example.com
     DocumentRoot "/data/data/com.termux/files/usr/share/phpmyadmin"
@@ -227,19 +227,8 @@ Type Ctrl-X to exit nano.
     CustomLog "var/log/apache2/dummy-host2.example.com-access_log" common
     </VirtualHost>
 
-    /data/data/com.termux/files/usr/share/apache2/default-site/htdocs
-    /data/data/com.termux/files/usr/share/phpmyadmin
-
-    /data/data/com.termux/files/usr/share/phpmyadmin
-    $PREFIX/share/phpmyadmin
-
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
-
-    killall -9 httpd
-    cd ~
-    rm /data/data/com.termux/files/usr/var/run/apache2/httpd.pid
-    httpd
 
 ### set document root to internal storage folder
 Make your internal storage folder as an apache2 web directory
@@ -272,6 +261,11 @@ Type Ctrl-X to exit nano.
 
     ErrorLog "var/log/apache2/dummy-host3.example.com-error_log"
     CustomLog "var/log/apache2/dummy-host3.example.com-access_log" common
+
+    killall httpd
+    cd ~
+    rm /data/data/com.termux/files/usr/var/run/apache2/httpd.pid
+    httpd
 
 ### Termux:Boot
 
@@ -315,6 +309,8 @@ reboot phone
 Type Ctrl-O and press Enter,
 Type Ctrl-X to exit nano.
 
+    su -c "reboot"
+
 ### Termux Backup 
     
     termux-setup-storage
@@ -338,8 +334,6 @@ If it's installed with pkg, do pkg remove <tool name>
 If it's downloaded as a git repo, running whatever it gave you to uninstall or deleting the whole directory usually works.
 
 # Work in progress
-
-## set document root to internal storage folder 
 
 pkg uninstall
 passwd
